@@ -1,16 +1,31 @@
 return {
-  name = "template install local",
+  name = "dnf install local rpm",
   request = {
     action = "install",
-    system = "template",
-    localPath = "/tmp/delta.tgz",
+    system = "dnf",
+    localPath = "/tmp/curl.rpm",
   },
-  fakeExec = {},
+  fakeExec = {
+    {
+      match = "command -v 'dnf' >/dev/null 2>&1",
+      exitCode = 0,
+      stdout = "",
+      stderr = "",
+      success = true,
+    },
+    {
+      match = "dnf install -y '/tmp/curl.rpm'",
+      exitCode = 0,
+      stdout = "Installed:\n  curl.rpm\n",
+      stderr = "",
+      success = true,
+    }
+  },
   expect = {
     success = true,
     events = { "installed", "success" },
     eventPayloads = {
-      installed = "{localTarget=true, path=/tmp/delta.tgz}",
+      installed = "{localTarget=true, path=/tmp/curl.rpm}",
       success = "ok",
     },
   }

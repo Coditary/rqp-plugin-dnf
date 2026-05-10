@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
-  "name": "template",
+  "name": "dnf",
   "version": "0.1.0",
-  "summary": "Template wrapper plugin",
-  "description": "ReqPack wrapper template bundle",
+  "summary": "ReqPack wrapper for DNF",
+  "description": "Thin ReqPack Lua plugin for the DNF package manager",
   "license": "MIT"
 }

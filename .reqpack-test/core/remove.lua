@@ -1,13 +1,28 @@
 return {
-  name = "template remove",
+  name = "dnf remove",
   request = {
     action = "remove",
-    system = "template",
+    system = "dnf",
     packages = {
-      { name = "delta" }
+      { name = "curl" }
     },
   },
-  fakeExec = {},
+  fakeExec = {
+    {
+      match = "command -v 'dnf' >/dev/null 2>&1",
+      exitCode = 0,
+      stdout = "",
+      stderr = "",
+      success = true,
+    },
+    {
+      match = "dnf remove -y 'curl'",
+      exitCode = 0,
+      stdout = "Removed:\n  curl\n",
+      stderr = "",
+      success = true,
+    }
+  },
   expect = {
     success = true,
     events = { "deleted", "success" },
